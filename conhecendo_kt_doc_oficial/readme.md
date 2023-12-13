@@ -18,7 +18,7 @@ Link [doc oficial](https://kotlinlang.org)
 
 ### Como instalar?
 
-Kotlin está incluso no Intellij IDEA e Android Studio. Entretanto, podemos usar o Kotlin sem nenhum desses IDEs, atráves do [Kotlin Playgroud](https://play.kotlinlang.org).
+Kotlin está incluso no Intellij IDEA e Android Studio. Entretanto, podemos usar o Kotlin sem nenhum desses IDEs, através do [Kotlin Playgroud](https://play.kotlinlang.org).
 
 #### ASDF
 
@@ -41,7 +41,7 @@ Seta a última versão instalada como global
 asdf global kotlin latest
 ```
 
-Verificar se o kotlin foi instalado corretamente
+Verificar se o Kotlin foi instalado corretamente
 ```
 kotlin -help
 ```
