@@ -44,7 +44,7 @@ fun soma(x: Int, y: Int): Int {                                               //
 fun multiplicacao(x: Int, y: Int) = x * y                                     // 4
 ​
 fun main() {
-    imprimirMensagem("Olá!")                                                  // 5                    
+    imprimirMensagem("Olá!")                                                  // 5
     imprimirMensagemComPrefixo("Olá!", "Log")                                 // 6
     imprimirMensagemComPrefixo("Olá!")                                        // 7
     imprimirMensagemComPrefixo(prefixo = "Log", mensagem = "Olá!")              // 8
@@ -64,6 +64,87 @@ fun main() {
 8. Realiza a chamada utilizando parâmetros nomeados e mudando sua ordem.
 9. Apresenta no console o resultado da função `soma`.
 10. Apresenta no console o resultado da função `multiplicacao`.
+
+---
+
+### Funções com Parâmetros varargs
+
+Varargs permite passar um número indefinido de parâmetros separado por vírgula.
+
+```kotlin
+fun imprimirTodos(vararg mensagens: String) {                            // 1
+    for (m in mensagens) println(m)
+}
+
+imprimirTodos("Hello", "Hallo", "Salut", "Hola", "你好")                 // 2
+​
+fun imprimirTodosComPrefixo(vararg mensagens: String, prefixo: String) {// 3
+    for (m in mensagens) println(prefixo + m)
+}
+
+imprimirTodosComPrefixo(
+    "Hello", "Hallo", "Salut", "Hola", "你好",
+    prefixo = "Greeting: "                                              // 4
+)
+​
+fun log(vararg entradas: String) {
+    imprimirTodos(*entradas)                                           // 5
+}
+
+log("Hello", "Hallo", "Salut", "Hola", "你好")
+```
+
+1. O modificador vararg torna o parâmetro em vararg.
+2. Permite chamarmos `imprimirTodos` com N parâmetros.
+3. Graças aos parâmetros nomeados, você pode adicionar outros parâmetros após vararg. Isso não é possível no Java por ele não ter valores nomeados, seria necessário primeiro passar os parâmetros tipados e depois o varags.
+4. Usando parâmetros nomeados você pode definir `prefixo` após varargs.
+5. Em tempo de execução, o vararg é apenas um vetor. Para passar um vararg como parâmetro, é necessário passar o operador especial (`*`) que nos permite passar `*entradas` (um vararg de String) ao invés de entradas como (um Array<String>).
+
+---
+
+### Variáveis
+
+Kotlin possui uma poderosa inferência de tipos. Você pode explicitamente tipar uma variável, ou deixar que o compilador faça esse trabalho para você. Kotlin não força imutabilidade, embora isso seja recomendado. Em essência, utilize `val` no lugar de `var`.
+
+```kotlin
+var a: String = "initial"  // 1
+
+println(a)
+
+val b: Int = 1             // 2
+val c = 3                  // 3
+```
+
+1. Declara uma variável mutável e inicializa ela.
+2. Declara uma variável imutável e inicializa ela.
+3. Declara uma variável imutável e inicializa ela sem especificar seu tipo. O compilador infere o tipo Int.
+
+```kotlin
+var e: Int  // 1
+
+println(e)  // 2
+```
+
+1. Declara uma variável sem inicializar.
+2. Ao tentar utilizar a variável, isso vai causar um erro em tempo de compilação: Variable 'e' must be initialized.
+
+Sinta-se livre para inicializar uma variável quando quiser, com tudo, ela precisa ser inicializada antes da primeira leitura.
+
+```kotlin
+val d: Int  // 1
+​
+if (someCondition()) {
+    d = 1   // 2
+} else {
+    d = 2   // 2
+}
+​
+println(d) // 3
+```
+
+1. Declara uma variável sem inicializar.
+2. Inicializa a variável de acordo com alguma condição.
+3. Realiza a leitura do valor, isso só é possível após inicialização.
 
 ---
 
@@ -113,7 +194,7 @@ fun sum(x: Int, y: Int): Int {                                          // 3
 fun multiply(x: Int, y: Int) = x * y                                    // 4
 ​
 fun main() {
-    printMessage("Hello")                                               // 5                    
+    printMessage("Hello")                                               // 5
     printMessageWithPrefix("Hello", "Log")                              // 6
     printMessageWithPrefix("Hello")                                     // 7
     printMessageWithPrefix(prefix = "Log", message = "Hello")           // 8
@@ -132,3 +213,81 @@ fun main() {
 8. Calls the same function using named arguments and changing the order of the arguments.
 9. Prints the result of the sum function call.
 10. Prints the result of the multiply function call.
+
+---
+
+### Functions with vararg Parameters
+
+Varargs allow you to pass any number of arguments by separating them with commas.
+
+```kotlin
+fun printAll(vararg messages: String) {                            // 1
+    for (m in messages) println(m)
+}
+
+printAll("Hello", "Hallo", "Salut", "Hola", "你好")                 // 2
+​
+fun printAllWithPrefix(vararg messages: String, prefix: String) {  // 3
+    for (m in messages) println(prefix + m)
+}
+
+printAllWithPrefix(
+    "Hello", "Hallo", "Salut", "Hola", "你好",
+    prefix = "Greeting: "                                          // 4
+)
+​
+fun log(vararg entries: String) {
+    printAll(*entries)                                             // 5
+}
+
+log("Hello", "Hallo", "Salut", "Hola", "你好")
+```
+
+1. The vararg modifier turns a parameter into a vararg.
+2. This allows calling printAll with any number of string arguments.
+3. Thanks to named parameters, you can even add another parameter of the same type after the vararg. This wouldn't be allowed in Java because there's no way to pass a value.
+4. Using named parameters, you can set a value to prefix separately from the vararg.
+5. At runtime, a vararg is just an array. To pass it along into a vararg parameter, use the special spread operator * that lets you pass in *entries (a vararg of String) instead of entries (an Array<String>).
+
+---
+
+### Variables
+
+Kotlin has powerful type inference. While you can explicitly declare the type of a variable, you'll usually let the compiler do the work by inferring it. Kotlin does not enforce immutability, though it is recommended. In essence use val over var.
+
+```kotlin
+var a: String = "initial"  // 1
+println(a)
+val b: Int = 1             // 2
+val c = 3                  // 3
+```
+
+1. Declares a mutable variable and initializes it.
+2. Declares an immutable variable and initializes it.
+3. Declares an immutable variable and initializes it without specifying the type. The compiler infers the type Int.
+
+```kotlin
+var e: Int  // 1
+println(e)  // 2
+```
+
+1. Declares a variable without initialization.
+2. An attempt to use the variable causes a compiler error: Variable 'e' must be initialized.
+
+You're free to choose when you initialize a variable, however, it must be initialized before the first read.
+
+```kotlin
+val d: Int  // 1
+​
+if (someCondition()) {
+    d = 1   // 2
+} else {
+    d = 2   // 2
+}
+​
+println(d) // 3
+```
+
+1. Declares a variable without initialization.
+2. Initializes the variable with different values depending on some condition.
+3. Reading the variable is possible because it's already been initialized.
