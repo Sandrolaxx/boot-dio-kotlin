@@ -148,6 +148,59 @@ println(d) // 3
 
 ---
 
+### Null Safety - Segurança contra Nulidade
+
+Um modo de escapar do mundo no NullPointerException, um tipo de variável que o Kotlin não permite é o `null`. Caso você precise setar uma variável com o valor nulo, declare que o valor pode ser potencialmente nulo adicionando `?` ao final do tipo.
+
+```kotlin
+var neverNull: String = "Isso não pode ser nulo"         // 1
+​
+neverNull = null                                         // 2
+​
+var nullable: String? = "Aqui é possível receber nulo"   // 3
+​
+nullable = null                                          // 4
+​
+var inferredNonNull = "Compilador infere que é não nulo" // 5
+​
+inferredNonNull = null                                   // 6
+​
+fun strLength(notNull: String): Int {                    // 7
+    return notNull.length
+}
+​
+strLength(neverNull)                                     // 8
+strLength(nullable)                                      // 9
+```
+
+1. Declara uma variável String não nula.
+2. Quando tenta setar um valor nulo em uma variável não nula, um erro de compilação é gerado.
+3. Declaração de uma String potencialmente nula.
+4. Setando um valor nulo em uma variável potencialmente nula. Isso é OK.
+5. Ao inferir tipos, o compilador assume que a variável é não nula para variáveis inicializadas com um valor.
+6. Quando tenta setar um valor nulo em uma variável com tipo inferido, um erro de compilação é gerado.
+7. Declaração de uma função com parâmetro String não-nulo.
+8. Chamando a função passando um parâmetro não nulo. Isso é OK.
+9. Quando chama a função com uma `String?` (potencialmente nulo) como argumento, um erro de compilação é gerado.
+
+**Trabalhando com nulos**
+
+Às vezes precisamos trabalhar com valores nulos, como interagir com código Java externo ou representar um estado verdadeiramente ausente. Kotlin prove uma forma elegante de tratar esses casos e resolver essas situações.
+
+```java
+fun describeString(maybeString: String?): String {              // 1
+    if (maybeString != null && maybeString.length > 0) {        // 2
+        return "String of length ${maybeString.length}"
+    } else {
+        return "Empty or null string"                           // 3
+    }
+}
+```
+
+1. A função recebe uma String?(potencialmente nula) e retorna sua descrição
+2. Se a String informada não for nula ou vazia, retorna então a informação sobre o seu tamanho.
+3. Contudo, caso seja nulo será retornada que a String é vazia ou nula
+
 # Practical Introduction to Kotlin Programming Language🇺🇸
 
 ### Hello world
@@ -291,3 +344,58 @@ println(d) // 3
 1. Declares a variable without initialization.
 2. Initializes the variable with different values depending on some condition.
 3. Reading the variable is possible because it's already been initialized.
+
+---
+
+### Null Safety
+
+In an effort to rid the world of NullPointerException, variable types in Kotlin don't allow the assignment of null. If you need a variable that can be null, declare it nullable by adding `?` at the end of its type.
+
+```kotlin
+var neverNull: String = "This can't be null"            // 1
+​
+neverNull = null                                        // 2
+​
+var nullable: String? = "You can keep a null here"      // 3
+​
+nullable = null                                         // 4
+​
+var inferredNonNull = "The compiler assumes non-null"   // 5
+​
+inferredNonNull = null                                  // 6
+​
+fun strLength(notNull: String): Int {                   // 7
+    return notNull.length
+}
+​
+strLength(neverNull)                                    // 8
+strLength(nullable)                                     // 9
+```
+
+1. Declares a non-null String variable.
+2. When trying to assign null to non-nullable variable, a compilation error is produced.
+3. Declares a nullable String variable.
+4. Sets the null value to the nullable variable. This is OK.
+5. When inferring types, the compiler assumes non-null for variables that are initialized with a value.
+6. When trying to assign null to a variable with inferred type, a compilation error is produced.
+7. Declares a function with a non-null string parameter.
+8. Calls the function with a String (non-nullable) argument. This is OK.
+9. When calling the function with a String? (nullable) argument, a compilation error is produced.
+
+**Working with Nulls**
+
+Sometimes Kotlin programs need to work with null values, such as when interacting with external Java code or representing a truly absent state. Kotlin provides null tracking to elegantly deal with such situations.
+
+```java
+fun describeString(maybeString: String?): String {              // 1
+    if (maybeString != null && maybeString.length > 0) {        // 2
+        return "String of length ${maybeString.length}"
+    } else {
+        return "Empty or null string"                           // 3
+    }
+}
+```
+
+1. A function that takes in a nullable string and returns its description.
+2. If the given string is not null and not empty, return information about its length.
+3. Otherwise, tell the caller that the string is empty or null.
