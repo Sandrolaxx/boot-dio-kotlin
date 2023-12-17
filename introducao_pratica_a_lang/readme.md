@@ -3,7 +3,7 @@
 ### Olá, mundo!
 
 ```kotlin
-ackage com.aktie              // 1
+package com.aktie              // 1
 
 fun main() {                  // 2
     println("Olá, mundo!")    // 3
@@ -47,7 +47,7 @@ fun main() {
     imprimirMensagem("Olá!")                                                  // 5
     imprimirMensagemComPrefixo("Olá!", "Log")                                 // 6
     imprimirMensagemComPrefixo("Olá!")                                        // 7
-    imprimirMensagemComPrefixo(prefixo = "Log", mensagem = "Olá!")              // 8
+    imprimirMensagemComPrefixo(prefixo = "Log", mensagem = "Olá!")            // 8
     println(soma(1, 2))                                                       // 9
     println(multiplicacao(2, 4))                                              // 10
 }
@@ -201,12 +201,112 @@ fun describeString(maybeString: String?): String {              // 1
 2. Se a String informada não for nula ou vazia, retorna então a informação sobre o seu tamanho.
 3. Contudo, caso seja nulo será retornada que a String é vazia ou nula
 
+---
+
+### Classes
+
+A declaração de classes consiste no nome da classe, o cabeçalho da classe(especificando seus parâmetros e o construtor primário) e o corpo da classe, cercado por parenteses. Tanto o cabeçalho quanto o corpo são opcionais; se a classe não tiver corpo, chaves podem ser omitidas.
+
+```kotlin
+class Customer                                  // 1
+​
+class Contact(val id: Int, var email: String)   // 2
+​
+fun main() {
+​
+    val customer = Customer()                   // 3
+
+    val contact = Contact(1, "clebim@gmail.com")// 4
+​
+    println(contact.id)                         // 5
+
+    contact.email = "sandrolax@gmail.com"       // 6
+}
+```
+
+1. Declara uma classe com nome Custumer com nenhuma propriedade ou definição de construtores. A não parametrização de um construtor faz com que o Kotlin crie um padrão automaticamente.
+2. Declaração de classe com duas propriedades: id imutável(`val`) e email mutável(var), e um construtor com dois parâmetros id e email.
+3. Cria uma instância da classe Custumer com o construtor padrão. Note que no Kotlin não é utilizada a palavra reservada `new`.
+4. Cria uma instância de uma classe Contato informados dois valores.
+5. Acessa a propriedade id.
+6. Atualiza a propriedade email.
+
+---
+
+### Generics
+
+Os generics são um mecanismo de genericidade que se tornou padrão nas linguagens modernas. Classes e funções genéricas aumentam a capacidade de reutilização do código encapsulando a lógica comum que é independente de um tipo genérico específico, como a lógica dentro de um List<T> é independente do que T é.
+
+#### Classes genéricas
+
+A primeira maneira de usar generics em Kotlin é criando classes genéricas.
+
+```kotlin
+class MutableStack<E>(vararg itens: E) {              // 1
+​
+  private val elements = items.toMutableList()
+​
+  fun push(element: E) = elements.add(element)        // 2
+​
+  fun peek(): E = elements.last()                     // 3
+​
+  fun pop(): E = elements.removeAt(elements.size - 1)
+​
+  fun isEmpty() = elements.isEmpty()
+​
+  fun size() = elements.size
+​
+  override fun toString() = "MutableStack(${elements.joinToString()})"
+
+}
+
+fun main() {
+   val stack = mutableStackOf(0,62, 3,14, 2,7)
+
+   println(stack)
+}
+```
+
+1. Define uma classe genérica MutableStack<E> onde `E` é chamado de parâmetro de tipo genérico. Em uso, ele é atribuído a um tipo específico, como Int, declarando um MutableStack<Int>.
+2. Dentro da classe genérica, `E` pode ser usado como parâmetro como qualquer outro tipo.
+3. Você também pode usar `E` como tipo de retorno.
+
+Observe que a implementação faz uso intenso da sintaxe abreviada do Kotlin para funções que podem ser definidas em uma única expressão.
+
+#### Funções genéricas
+
+Você também pode gerar funções se sua lógica for independente de um tipo específico. Por exemplo, você pode escrever uma função utilitária para criar pilhas mutáveis:
+
+```kotlin
+fun <E> mutableStackOf(vararg elements: E) = MutableStack(*elements) // 1
+
+fun main() {
+   val stack = mutableStackOf(0,62, 3,14, 2,7)                       // 2
+
+   println(stack)
+
+    for (index in 1..stack.size()) {                                // 3
+        stack.pop()
+
+        println(stack)
+   }
+}
+```
+
+1. Criação da função genérica que recebe um varargs, transforma esse array recebido em uma `MutableStack`(Classe genérica do exemplo anterior), relembrando do (`*`) que permite passarmos o varargs como ele é.
+2. Realizando a chamada da função.
+3. Faz um for para remover todos os itens.
+
+Observe que o compilador pode inferir o tipo genérico dos parâmetros de mutableStackOf para que você não precise escrever mutableStackOf<Double>(...).
+
+---
+
 # Practical Introduction to Kotlin Programming Language🇺🇸
 
 ### Hello world
 
 ```kotlin
-ackage com.aktie                // 1
+package com.aktie                // 1
 
 fun main() {                    // 2
     println("Hello, World!")    // 3
@@ -399,3 +499,94 @@ fun describeString(maybeString: String?): String {              // 1
 1. A function that takes in a nullable string and returns its description.
 2. If the given string is not null and not empty, return information about its length.
 3. Otherwise, tell the caller that the string is empty or null.
+
+---
+
+### Classes
+
+The class declaration consists of the class name, the class header (specifying its type parameters, the primary constructor etc.) and the class body, surrounded by curly braces. Both the header and the body are optional; if the class has no body, curly braces can be omitted.
+
+```kotlin
+class Customer                                  // 1
+​
+class Contact(val id: Int, var email: String)   // 2
+​
+fun main() {
+​
+    val customer = Customer()                   // 3
+
+    val contact = Contact(1, "clebim@gmail.com")// 4
+​
+    println(contact.id)                         // 5
+
+    contact.email = "sandrolax@gmail.com"       // 6
+}
+```
+
+1. Declares a class named Customer without any properties or user-defined constructors. A non-parameterized default constructor is created by Kotlin automatically.
+2. Declares a class with two properties: immutable id and mutable email, and a constructor with two parameters id and email.
+3. Creates an instance of the class Customer via the default constructor. Note that there is no new keyword in Kotlin.
+4. Creates an instance of the class Contact using the constructor with two arguments.
+5. Accesses the property id.
+6. Updates the value of the property email.
+
+---
+
+### Generics
+
+Generics are a genericity mechanism that's become standard in modern languages. Generic classes and functions increase code reusability by encapsulating common logic that is independent of a particular generic type, like the logic inside a List<T> is independent of what T is.
+
+#### Generic Classes
+
+The first way to use generics in Kotlin is creating generic classes.
+
+```kotlin
+class MutableStack<E>(vararg items: E) {              // 1
+​
+  private val elements = items.toMutableList()
+​
+  fun push(element: E) = elements.add(element)        // 2
+​
+  fun peek(): E = elements.last()                     // 3
+​
+  fun pop(): E = elements.removeAt(elements.size - 1)
+​
+  fun isEmpty() = elements.isEmpty()
+​
+  fun size() = elements.size
+​
+  override fun toString() = "MutableStack(${elements.joinToString()})"
+}
+```
+
+1. Defines a generic class MutableStack<E> where E is called the generic type parameter. At use-site, it is assigned to a specific type such as Int by declaring a MutableStack<Int>.
+2. Inside the generic class, `E` can be used as a parameter like any other type.
+3. You can also use `E` as a return type.
+
+Note that the implementation makes heavy use of Kotlin's shorthand syntax for functions that can be defined in a single expression.
+
+#### Generic Functions
+
+You can also generify functions if their logic is independent of a specific type. For instance, you can write a utility function to create mutable stacks:
+​
+```kotlin
+fun <E> mutableStackOf(vararg elements: E) = MutableStack(*elements)  // 1
+
+fun main() {
+   val stack = mutableStackOf(0,62, 3,14, 2,7)                       // 2
+
+   println(stack)
+
+    for (index in 1..stack.size()) {                                // 3
+        stack.pop()
+
+        println(stack)
+   }
+}
+```
+
+1. A generic function, receive a varargs parameter, transform that received array into a `MutableStack`(generic class, last example), remember the (`*`) to recive varargs as a varargs.
+2. Call the function.
+3. Create a for to remove all elements of stack.
+
+Note that the compiler can infer the generic type from the parameters of mutableStackOf so that you don't have to write mutableStackOf<Double>(...).
