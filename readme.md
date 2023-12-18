@@ -9,3 +9,7 @@ Bootcamp desenvolvimento backend com Kotlin.
 [Conhecendo Kotlin e Documentação Oficial](/conhecendo_kt_doc_oficial/readme.md)
 
 [Introdução Prática à Linguagem Kotlin](/introducao_pratica_a_lang/readme.md)
+
+[Control Flow](/control_flow/readme.md)
+
+[Oriented Object Programming - OOP](/poo_kotlin/readme.md)
