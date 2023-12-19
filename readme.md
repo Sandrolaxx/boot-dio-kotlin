@@ -13,3 +13,5 @@ Bootcamp desenvolvimento backend com Kotlin.
 [Control Flow and Useful Functions](/control_flow/readme.md)
 
 [Oriented Object Programming - OOP](/poo_kotlin/readme.md)
+
+[O Poder das Funções em Kotlin](/o_poder_das_funcoes/readme.md)
