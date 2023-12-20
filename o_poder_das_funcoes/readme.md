@@ -359,8 +359,45 @@ fun main() {
 É ainda possível executar extensões em referências nulas. Em uma função de extensão, você pode verificar se há nulo no objeto e usar o resultado em seu código:
 
 ```kotlin
-fun <T> T?.nullSafeToString() = this?.toString() ?: "NULL"  // 1
+fun <T> T?.nullSafeToString() = this?.toString() ?: "NULL"
 ```
+
+---
+
+### Suspend Functions
+
+Suponha que temos duas funções de suspensão definidas em outro lugar que fazem algo útil, como algum tipo de chamada de serviço remoto ou computação. Nós apenas fingimos que eles são úteis, mas na verdade cada um atrasa apenas um segundo para efeitos deste exemplo:
+
+```kotlin
+    import kotlin.coroutines.*
+
+suspend fun doSomethingUsefulOne(): Int {
+    delay(1000L)
+
+    return 13
+}
+
+suspend fun doSomethingUsefulTwo(): Int {
+    delay(1000L)
+
+    return 29
+}
+
+fun main() = runBlockin {
+    doWorld();
+}
+
+suspend fun doWorld() = coroutineScope {
+    launch {
+        delay(1000L)
+        println("World!")
+    }
+
+    println("Hello")
+}
+```
+
+O que faremos se precisarmos que eles sejam invocados sequencialmente - primeiro doSomethingUsefulOne e depois doSomethingUsefulTwo, e calcule a soma de seus resultados? Na prática, fazemos isso se usarmos o resultado da primeira função para tomar uma decisão sobre se precisamos invocar a segunda ou para decidir como invocá-la.
 
 ---
 
@@ -722,3 +759,38 @@ fun <T> T?.nullSafeToString() = this?.toString() ?: "NULL"  // 1
 ```
 
 ---
+
+### Suspend Functions
+
+Assume that we have two suspending functions defined elsewhere that do something useful like some kind of remote service call or computation. We just pretend they are useful, but actually each one just delays for a second for the purpose of this example:
+
+```kotlin
+    import kotlin.coroutines.*
+
+suspend fun doSomethingUsefulOne(): Int {
+    delay(1000L)
+
+    return 13
+}
+
+suspend fun doSomethingUsefulTwo(): Int {
+    delay(1000L)
+
+    return 29
+}
+
+fun main() = runBlockin {
+    doWorld();
+}
+
+suspend fun doWorld() = coroutineScope {
+    launch {
+        delay(1000L)
+        println("World!")
+    }
+
+    println("Hello")
+}
+```
+
+What do we do if we need them to be invoked sequentially — first doSomethingUsefulOne and then doSomethingUsefulTwo, and compute the sum of their results? In practice, we do this if we use the result of the first function to make a decision on whether we need to invoke the second one or to decide on how to invoke it
