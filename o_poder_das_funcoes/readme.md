@@ -369,7 +369,7 @@ fun <T> T?.nullSafeToString() = this?.toString() ?: "NULL"
 Suponha que temos duas funções de suspensão definidas em outro lugar que fazem algo útil, como algum tipo de chamada de serviço remoto ou computação. Nós apenas fingimos que eles são úteis, mas na verdade cada um atrasa apenas um segundo para efeitos deste exemplo:
 
 ```kotlin
-    import kotlin.coroutines.*
+import kotlinx.coroutines.*
 
 suspend fun doSomethingUsefulOne(): Int {
     delay(1000L)
@@ -383,8 +383,14 @@ suspend fun doSomethingUsefulTwo(): Int {
     return 29
 }
 
-fun main() = runBlockin {
-    doWorld();
+fun main() {
+    runBlocking {
+        doWorld()
+
+        println(doSomethingUsefulOne())
+        println(doSomethingUsefulTwo())
+    }
+
 }
 
 suspend fun doWorld() = coroutineScope {
@@ -765,7 +771,7 @@ fun <T> T?.nullSafeToString() = this?.toString() ?: "NULL"  // 1
 Assume that we have two suspending functions defined elsewhere that do something useful like some kind of remote service call or computation. We just pretend they are useful, but actually each one just delays for a second for the purpose of this example:
 
 ```kotlin
-    import kotlin.coroutines.*
+import kotlinx.coroutines.*
 
 suspend fun doSomethingUsefulOne(): Int {
     delay(1000L)
@@ -779,8 +785,14 @@ suspend fun doSomethingUsefulTwo(): Int {
     return 29
 }
 
-fun main() = runBlockin {
-    doWorld();
+fun main() {
+    runBlocking {
+        doWorld()
+
+        println(doSomethingUsefulOne())
+        println(doSomethingUsefulTwo())
+    }
+
 }
 
 suspend fun doWorld() = coroutineScope {
