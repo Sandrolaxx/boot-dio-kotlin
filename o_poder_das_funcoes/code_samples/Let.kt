@@ -3,16 +3,19 @@ fun main() {
         print(s.uppercase())
     }
 
-    val empty = "test".let {               // 1
-        customPrint(it)                    // 2
-        it.isEmpty()                       // 3
-    }
+    val empty =
+            "test".let {
+                customPrint(it)
+                
+                it.isEmpty()
+            }
+            
     println(" is empty: $empty")
 
     fun printNonNull(str: String?) {
         println("Printing \"$str\":")
 
-        str?.let {                         // 4
+        str?.let {
             print("\t")
             customPrint(it)
             println()
@@ -20,7 +23,7 @@ fun main() {
     }
 
     fun printIfBothNonNull(strOne: String?, strTwo: String?) {
-        strOne?.let { firstString ->       // 5
+        strOne?.let { firstString ->
             strTwo?.let { secondString ->
                 customPrint("$firstString : $secondString")
                 println()
@@ -30,5 +33,5 @@ fun main() {
 
     printNonNull(null)
     printNonNull("my string")
-    printIfBothNonNull("First","Second")
+    printIfBothNonNull("First", "Second")
 }

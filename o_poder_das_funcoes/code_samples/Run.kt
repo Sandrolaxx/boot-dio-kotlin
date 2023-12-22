@@ -5,7 +5,7 @@ fun main() {
         ns?.run {
             println("\tis empty? " + isEmpty())
             println("\tlength = $length")
-            
+
             length
         }
     }

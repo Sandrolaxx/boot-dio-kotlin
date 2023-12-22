@@ -7,5 +7,5 @@ fun writeCreationLog(p: PersonAlso) {
 }
 
 fun main() {
-    PersonAlso("Jake", 30, "Android developer").also { writeCreationLog(it) }
+    PersonAlso("Sandrolaxx", 25, "Java developer").also { writeCreationLog(it) }
 }

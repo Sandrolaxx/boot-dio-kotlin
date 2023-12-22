@@ -15,3 +15,5 @@ Bootcamp desenvolvimento backend com Kotlin.
 [Oriented Object Programming - OOP](/poo_kotlin/readme.md)
 
 [O Poder das Funções em Kotlin](/o_poder_das_funcoes/readme.md)
+
+[Tratamento de Exceções em Kotlin](/tratamento_excecoes/readme.md)
