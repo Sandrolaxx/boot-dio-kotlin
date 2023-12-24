@@ -17,3 +17,5 @@ Bootcamp desenvolvimento backend com Kotlin.
 [O Poder das Funções em Kotlin](/o_poder_das_funcoes/readme.md)
 
 [Tratamento de Exceções em Kotlin](/tratamento_excecoes/readme.md)
+
+[Desafios de Código - Code Challenges](/code_challenges/readme.md)
