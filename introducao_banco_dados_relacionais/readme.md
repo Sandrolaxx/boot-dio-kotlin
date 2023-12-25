@@ -266,3 +266,130 @@ Ela garante que os atributos não chave dependam da chave primária, evitando de
 Deve estar conforme a 1FN e 2FN, essa forma diz que nenhuma coluna não-chave pode depender de outra coluna não-chave. Exemplo, relação Estado --> Cidade.
 
 Ela elimina dependências transitivas entre os atributos não chave, garantindo que cada atributo não chave dependa apenas da chave primária, não havendo dependências indiretas entre eles.
+
+---
+
+### Consultas avançadas
+
+#### Junções: JOIN's
+
+São usadas no SQL para combinar dados de duas ou mais tabelas relacionais em uma única consulta.
+
+Tipos:
+
+- INNER JOIN
+- LEFT JOIN ou LEFT OUTER JOIN
+- RIGHT JOIN ou RIGHT OUTER JOIN
+- FULL JOIN ou FULL OUTER JOIN
+
+#### INNER JOIN
+
+Retorna apenas as linhas que têm correspondência em ambas as tabelas envolvidas na junção. A junção é feita com base em uma condição de igualdade especificada na cláusula ON.
+
+```SQL
+SELECT *
+FROM tabela1 tab1
+INNER JOIN tabela2 tab2 ON tab1.coluna = tab2.coluna;
+```
+
+#### LEFT JOIN
+
+Retorna todas as linhas da tabela à esquerda da junção e as linhas correspondentes da tabela à direita. Se não houver correspondência, os valores da tabela à direita serão NULL.
+
+```SQL
+SELECT *
+FROM tabela1 tab1
+LEFT JOIN tabela2 tab2 ON tab1.coluna = tab2.coluna;
+```
+
+#### RIGHT JOIN
+
+Retorna todas as linhas da tabela à direita da junção e as linhas correspondentes da tabela à esquerda. Se não houver correspondência, os valores da tabela à direita serão NULL.
+
+```SQL
+SELECT *
+FROM tabela1 tab1
+RIGHT JOIN tabela2 tab2 ON tab1.coluna = tab2.coluna;
+```
+
+#### FULL JOIN - NÃO SUPORTADO POR TODOS SGBD's
+
+Retorna todas as linhas de ambas as tabelas envolvidas na junção, combinando-as com base em uma condição de igualdade. Se não houver correspondência, os valores da tabela à direita serão NULL.
+
+```SQL
+SELECT *
+FROM tabela1 tab1
+FULL JOIN tabela2 tab2 ON tab1.coluna = tab2.coluna;
+```
+
+#### Sub Consultas
+
+Elas permitem realizar consultas mais complexas, permitindo que você use o resultado de uma consulta como entrada para outra consulta.
+
+Cenários de utilização:
+
+- SELECT
+- FROM
+- WHERE
+- HAVING
+- JOIN
+
+#### Funções agregadas e agrupamento de resultados
+
+Funções agregadas ão funções que realizam algum pré-processamento ou cálculo retornando algum valor, abaixo temos algumas das principais:
+
+- COUNT: Conta o número de registros
+- SUM: Soma os valores de uma coluna numérica
+- AVG: Calcula a média dos valores de uma coluna numérica
+- MIN: Retorna o valor mínimo de uma coluna
+- MAX: Retorna o valor máximo de uma coluna
+
+#### Agrupamento de Resultados
+
+Ele é usado para dividirmos nossos dados em grupos de acordo com algum critério.
+
+```SQL
+SELECT ...
+FROM   ...
+GROUP BY ..
+```
+
+#### Ordenação de Resultados
+
+Ele é usado para ordenar o retorno dos resultados de acordo com algum critério. Exemplo ordenar usuários por idade. Essa ordenação pode ser tanto acendente(ASC) quanto descendente(DESC).
+
+```SQL
+SELECT ...
+FROM   ...
+ORDER BY ... DESC
+```
+
+#### Índices de busca
+
+Esses recursos são fundamentais para melhorar o desempenho das consultas e otimizar a recuperação de informações em bancos de dados.
+
+Comando de criação de índice:
+
+```SQL
+CREATE INDEX {{nome_index}}
+ON {{tabela}} ({{coluna1, coluna2...}})
+```
+
+#### Análise do Plano de Execução - Explain
+
+Ela nos permite examinar as operações realizadas, as tabelas acessadas, os índices utilizados e outras informações importantes para identificar possível melhorias de desempenho. Ele retorna dados de execução da query. Abaixo temos os dados que o comando retorna:
+
+- select_type: "SIMPLE", "SUBQUERY", "JOIN"
+- table
+- type: "ALL", "INDEX" entre outros
+- possible_keys: Os índices possíveis que podem ser utilizados na operação
+- key: O índice utilizado na operação, se aplicável
+- key_len: O comprimento do índice utilizado
+- ref: As colunas ou constantes usadas para acessar o índice
+- rows
+
+```SQL
+EXPLAIN
+    SELECT *
+    FROM {{tabela}}
+```
