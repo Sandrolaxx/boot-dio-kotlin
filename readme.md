@@ -19,3 +19,7 @@ Bootcamp desenvolvimento backend com Kotlin.
 [Tratamento de Exceções em Kotlin](/tratamento_excecoes/readme.md)
 
 [Desafios de Código - Code Challenges](/code_challenges/readme.md)
+
+[Introdução a Banco de Dados Relacionais](/introducao_banco_dados_relacionais/readme.md)
+
+[Introdução a Banco de Dados Não Relacionais - NoSQL](/introducao_banco_dados_nao_relacionais/readme.md)
