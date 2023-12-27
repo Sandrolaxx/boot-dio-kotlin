@@ -264,11 +264,218 @@ db.usuarios.insertOne({
 - db.usuarios.updateMany({}, {$set:{}})
 - $inc -- Incrementar
 - $push -- Adicionar elemento array
-- $set
-- $unset
-- $rename
+- $set -- atualizar valor
+- $unset -- deleta o valor em específico
+- $rename -- atualizar o nome do campo
 
 #### Atualização Documentos
 
 - db.usuarios.deleteOne({})
 - db.usuarios.deleteMany({})
+
+---
+
+### Consultas
+
+#### Operador de igualdade
+
+Realiza consultas baseadas em um valor específico para um campo.
+
+Exemplo:
+
+```
+db.usuarios.find({"endereco.cidade": "Cascavel"})
+```
+
+#### Operadores lógicos
+
+Realizar consultas baseadas em um valor específico para um campo.
+
+- $and
+- $or
+- $not
+
+Exemplo and:
+
+```
+db.usuarios.find({$and:[{idade: 25}, {nome: "Sandrolaxx"}]})
+```
+
+Exemplo or:
+
+```
+db.usuarios.find({$or:[{idade: 22}, {nome: "Flavia"}]})
+```
+
+#### Operador de Comparação
+
+-$eq: ==
+-$ne: != 
+-$gt: >
+-$gte: >= 
+-$lt: <
+-$lte: <= 
+-$in: []
+-$nin: []
+
+Exemplo eq:
+
+```
+db.usuarios.find({idade: {$ne: 25}})
+```
+
+Exemplo gt:
+
+```
+db.usuarios.find({idade: {$gt: 22}})
+```
+
+Exemplo lt:
+
+```
+db.usuarios.find({idade: {$lt: 24}})
+```
+
+Exemplo in:
+
+```
+db.usuarios.find({nome: {$in: ["Sandrolaxx", "Robert"]}})
+```
+
+Exemplo nin:
+
+```
+db.usuarios.find({nome: {$nin: ["Sandrolaxx", "Robert"]}})
+```
+
+#### Projeções
+
+Definir quais campos devem ser retornados da consulta.
+
+Exemplo:
+
+```
+db.usuarios.find({nome: {$eq: "Sandrolaxx"}}, {nome: 1})
+```
+
+#### Ordenação
+
+Ordenar os resultados de uma consulta com base em um ou mais campos.
+
+Exemplo:
+
+```
+db.usuarios.find({idade: {$gt: 20}}, {nome: 1, idade: 2}).sort({idade: 1})
+```
+
+#### Limitação
+
+Limitar a quantidade de número de documentos retornados em uma consulta.
+
+Exemplo:
+
+```
+db.usuarios.find({idade: {$gt: 20}}, {nome: 1, idade: 2}).sort({idade: 1}).limit(2)
+```
+
+#### Paginação
+
+```
+db.usuarios.find().skip(10).limit(5)
+```
+
+---
+
+### Redis
+
+#### O que é o Redis?
+
+O Redis é um sistema de armazenamento de dados em memória de alto desempenho.
+
+#### Principais características
+
+- Armazenamento em Memória
+- Estrutura de Dados Versátil
+- Operações Atômicas
+- Cache de Alto Desempenho
+- Pub/Sub (Publicação/Subscrição)
+
+#### Principais utilizações
+
+- Cache de dados
+- Filas de Mensagens
+- Contagem de acessos e estatísticas em tempo real
+- Gerenciamento de Sessões
+- Cache de resultados de consultas
+
+#### Principais comandos
+
+- SET       - Adicionar novo valor
+- GET       - Buscar o valor
+- DEL       - Deletar valor
+- EXISTS    - Verificar se existe uma chave(ela não expirou ainda) 
+- KEYS      - Retornar chaves correspondentes
+- INCR      - Realizar incremento de um valor
+- DECR      - Realizar decremento de um valor
+- EXPIRES   - Define o tempo de vida do registro
+- TTL       - Retorna o tempo de vida do nosso registro
+
+> É possível testar o redis em [try.redis.io](https://try.redis.io/)
+
+Exemplos de comandos:
+
+```
+set nome "sandrolax"
+set nome_2 "gabs"
+
+get nome
+//Retorno "sandrolax"
+
+keys nome*
+//Retorno 
+//1) "nome_2"
+//2) "nome"
+
+del nome
+//Retorno (integer) 1
+
+expire nome 10
+//Vai realizar a exclusão daqui 10s
+
+exists nome
+//Retorno (integer) 1
+
+exists nome_x
+//Retorno (integer) 0
+
+
+set acessos 1
+
+incr acessos
+//Retorno (integer) 2
+
+decr acessos
+//Retorno (integer) 1
+```
+
+Criando um array
+
+```
+LPUSH usuarios "Sandrolax" "Jooj" "Roberto"
+//Retorno (integer) 3
+
+//Listando dados array
+lrange usuarios 0 -1
+//Retorno
+1) "Roberto"
+2) "Jooj"
+3) "Sandrolax"
+
+//Adicionar novo elemento
+LPUSH usuarios "Clebim"
+//Retorno (integer) 4
+
+//Retorna o tamanho da lista
+LLEN usuarios
+(integer) 4
+```
