@@ -38,6 +38,7 @@ SGBD - CRUD: Acrônimo para CREATE, READ, UPDATE e DELETE.
 SGBD - Estrutura
 
 ![Captura de tela de 2023-12-24 17-24-46](https://github.com/Sandrolaxx/frostNext/assets/61207420/9534d480-8a74-4fd5-b521-5247db33ba25)
+<br/>(Fonte: Digital Innovation One, 2023)
 
 Características:
 

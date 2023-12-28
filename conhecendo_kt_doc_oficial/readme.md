@@ -9,6 +9,7 @@
 #### Pontos interessantes
 
 ![Captura de tela de 2023-12-11 06-23-29](https://github.com/Sandrolaxx/boot-dio-kotlin/assets/61207420/ebc1d1bf-0e1a-499d-a524-b4c5c25c38c3)
+<br/>(Fonte: kotlinlang.org, 2023)
 
 Kotlin tem algumas iniciativas, que permitem do convencional e conhecido desenvolvimento Android nativo, desenvolvimento web com [Kotlin/JS](https://kotlinlang.org/docs/js-overview.html), desenvolvimento [back-end](https://kotlinlang.org/lp/server-side/), desenvolvimento [Mutiplataforma Nativo](https://kotlinlang.org/docs/native-overview.html) até [Data Science](https://kotlinlang.org/docs/data-science-overview.html). Isso dá muito poder e flexibilidade a linguagem, aprender uma única vez e ter uma gama de áreas para poder atuar.
 

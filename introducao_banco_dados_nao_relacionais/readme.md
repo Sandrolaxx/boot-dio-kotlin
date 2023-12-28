@@ -114,6 +114,7 @@ Uso: Uma rede social pode usar o Neo4j para armazenar os perfis dos usuários em
 É dividido em documentos, coleções que são uma lista de documentos e database que possui uma série de coleções.
 
 ![Captura de tela de 2023-12-26 06-25-02](https://github.com/Sandrolaxx/boot-dio-kotlin/assets/61207420/d0af804a-885b-4b65-a3b2-1a3c44e5fc28)
+<br/>(Fonte: Digital Innovation One, 2023)
 
 Coleções: Agrupamento lógico de documentos, não exige esquema ou que os documentos tenham uma mesma estrutura.
 
