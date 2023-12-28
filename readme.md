@@ -1,6 +1,6 @@
 # DIO - Bootcamp Backend Kotlin
 
-![2ab27303-ccbe-46a5-8138-c50c29175960](https://github.com/Sandrolaxx/boot-dio-kotlin/assets/61207420/a5090ce6-7947-4e2d-bd2d-c69fa3e31000)
+![bootcamp-logo](https://github.com/Sandrolaxx/boot-dio-kotlin/assets/61207420/70f590c3-a4ed-4efe-ab97-e179c764ac1a)
 
 Bootcamp desenvolvimento backend com Kotlin.
 
