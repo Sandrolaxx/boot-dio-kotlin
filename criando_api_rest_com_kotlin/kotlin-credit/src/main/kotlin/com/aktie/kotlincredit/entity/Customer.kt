@@ -1,6 +1,7 @@
 package com.aktie.kotlincredit.entity
 
 import jakarta.persistence.*
+import java.math.BigDecimal
 
 @Entity
 @Table(name = "KT_CUSTOMER")
@@ -9,7 +10,7 @@ class Customer {
     @Id
     @Column(nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long? = null
+    var id: Long? = null
 
     @Column(nullable = false)
     var firstName: String = ""
@@ -24,17 +25,21 @@ class Customer {
     var email: String = ""
 
     @Column(nullable = false, unique = true)
+    var income: BigDecimal = BigDecimal.ZERO
+
+    @Column(nullable = false, unique = true)
     var password: String = ""
 
     @Embedded
-    var address: Address = Address()
+    var address: Address
 
     @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, cascade = arrayOf(CascadeType.ALL))
     var credits: List<Credit>
 
-    constructor(cpf: String) {
+    constructor(id: Long? = null, cpf: String = "", address: Address = Address()) {
+        this.id = id
         this.cpf = cpf
-        this.address = Address()
+        this.address = address
         this.credits = mutableListOf()
     };
 }

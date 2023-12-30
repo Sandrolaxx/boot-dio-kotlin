@@ -4,8 +4,10 @@ import com.aktie.kotlincredit.entity.Credit
 import com.aktie.kotlincredit.repositories.ICreditRepository
 import com.aktie.kotlincredit.service.ICreditService
 import com.aktie.kotlincredit.service.ICustomerService
+import org.springframework.stereotype.Service
 import java.util.*
 
+@Service
 class CreditService(
     private val creditRepo: ICreditRepository,
     private val customerService: ICustomerService
