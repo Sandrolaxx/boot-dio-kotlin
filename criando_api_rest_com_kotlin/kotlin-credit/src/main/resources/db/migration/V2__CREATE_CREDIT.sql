@@ -6,7 +6,7 @@ CREATE TABLE kt_credit
     day_first_installment  date                                    NOT NULL,
     number_of_installments INT                                     NOT NULL,
     status                 SMALLINT,
-    custumer_id            BIGINT,
+    customer_id            BIGINT,
     CONSTRAINT pk_kt_credit PRIMARY KEY (id)
 );
 
@@ -14,4 +14,4 @@ ALTER TABLE kt_credit
     ADD CONSTRAINT uc_kt_credit_credit_code UNIQUE (credit_code);
 
 ALTER TABLE kt_credit
-    ADD CONSTRAINT FK_KT_CREDIT_ON_CUSTUMER FOREIGN KEY (custumer_id) REFERENCES kt_custumer (id);
+    ADD CONSTRAINT FK_KT_CREDIT_ON_CUSTOMER FOREIGN KEY (customer_id) REFERENCES kt_customer (id);

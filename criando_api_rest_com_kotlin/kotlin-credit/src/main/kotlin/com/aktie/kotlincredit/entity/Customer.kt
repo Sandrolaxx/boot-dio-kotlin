@@ -3,8 +3,8 @@ package com.aktie.kotlincredit.entity
 import jakarta.persistence.*
 
 @Entity
-@Table(name = "KT_CUSTUMER")
-class Custumer {
+@Table(name = "KT_CUSTOMER")
+class Customer {
 
     @Id
     @Column(nullable = false)
@@ -29,7 +29,7 @@ class Custumer {
     @Embedded
     var address: Address = Address()
 
-    @OneToMany(mappedBy = "custumer", fetch = FetchType.LAZY, cascade = arrayOf(CascadeType.ALL))
+    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY, cascade = arrayOf(CascadeType.ALL))
     var credits: List<Credit>
 
     constructor(cpf: String) {

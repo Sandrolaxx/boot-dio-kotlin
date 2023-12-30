@@ -31,17 +31,17 @@ class Credit {
     val status: Status
 
     @ManyToOne
-    val custumer: Custumer?
+    var customer: Customer?
 
     constructor(
         creditValue: BigDecimal = BigDecimal.ZERO,
         dayFirstInstallment: LocalDate, numberOfInstallments: Int = 0,
-        custumer: Custumer? = null
+        customer: Customer? = null
     ) {
         this.creditValue = creditValue
         this.dayFirstInstallment = dayFirstInstallment
         this.numberOfInstallments = numberOfInstallments
         this.status = Status.IN_PROGRESS
-        this.custumer = custumer
+        this.customer = customer
     }
 }
