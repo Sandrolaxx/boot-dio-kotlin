@@ -8,8 +8,7 @@ Bootcamp desenvolvimento backend com Kotlin.
 
 [Versionamento com Git e GitHub](/versionamento_git/readme.md)
 
-[Conhecendo Kotlin e Documentação Oficial](/conhecendo_kt_doc_oficial/readme.md)a
-
+[Conhecendo Kotlin e Documentação Oficial](/conhecendo_kt_doc_oficial/readme.md)
 
 [Introdução Prática à Linguagem Kotlin](/introducao_pratica_a_lang/readme.md)
 

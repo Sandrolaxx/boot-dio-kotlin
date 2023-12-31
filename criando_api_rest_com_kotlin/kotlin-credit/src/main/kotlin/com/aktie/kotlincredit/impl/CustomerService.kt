@@ -1,6 +1,7 @@
 package com.aktie.kotlincredit.impl
 
 import com.aktie.kotlincredit.entity.Customer
+import com.aktie.kotlincredit.exception.BusinessException
 import com.aktie.kotlincredit.repositories.ICustomerRepository
 import com.aktie.kotlincredit.service.ICustomerService
 import org.springframework.stereotype.Service
@@ -16,12 +17,14 @@ class CustomerService(
 
     override fun findById(id: Long): Customer {
         return customerRepo.findById(id).orElseThrow {
-            throw RuntimeException("Id $id not found")
+            throw BusinessException("Id $id not found")
         }
     }
 
     override fun delete(id: Long) {
-        customerRepo.deleteById(id)
+        val customer: Customer = this.findById(id)
+
+        customerRepo.delete(customer)
     }
 
 }

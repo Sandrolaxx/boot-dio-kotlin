@@ -6,6 +6,8 @@ import com.aktie.kotlincredit.dto.CreditViewDTO
 import com.aktie.kotlincredit.impl.CreditService
 import com.aktie.kotlincredit.impl.CustomerService
 import com.aktie.kotlincredit.mappers.CreditMapper
+import jakarta.validation.Valid
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import java.util.*
@@ -18,12 +20,12 @@ class CreditController(
 ) {
 
     @PostMapping()
-    fun create(@RequestBody creditDTO: CreditDTO): ResponseEntity<String> {
+    fun create(@RequestBody @Valid creditDTO: CreditDTO): ResponseEntity<String> {
         val credit = CreditMapper.toEntity(creditDTO)
 
         val savedCredit = creditService.save(credit)
 
-        return ResponseEntity.ok("Credit ${savedCredit.id} created!")
+        return ResponseEntity.status(HttpStatus.CREATED).body("Credit ${savedCredit.id} created!")
     }
 
     @GetMapping

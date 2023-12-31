@@ -5,6 +5,8 @@ import com.aktie.kotlincredit.dto.CustomerEditDTO
 import com.aktie.kotlincredit.dto.CustomerViewDTO
 import com.aktie.kotlincredit.impl.CustomerService
 import com.aktie.kotlincredit.mappers.CustomerMapper
+import jakarta.validation.Valid
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
@@ -15,11 +17,11 @@ class CustomerController(
 ) {
 
     @PostMapping()
-    fun register(@RequestBody customerDTO: CustomerDTO): ResponseEntity<String> {
+    fun register(@RequestBody @Valid customerDTO: CustomerDTO): ResponseEntity<String> {
         val customerEntity = CustomerMapper.toEntity(customerDTO)
         val savedCustomer = customerService.save(customerEntity)
 
-        return ResponseEntity.ok("Customer ${savedCustomer.email} saved!")
+        return ResponseEntity.status(HttpStatus.CREATED).body("Customer ${savedCustomer.email} saved!")
     }
 
     @GetMapping
@@ -30,7 +32,10 @@ class CustomerController(
     }
 
     @PatchMapping
-    fun update(@RequestHeader id: Long, @RequestBody customerDTO: CustomerEditDTO): ResponseEntity<CustomerViewDTO> {
+    fun update(
+        @RequestHeader id: Long,
+        @RequestBody @Valid customerDTO: CustomerEditDTO
+    ): ResponseEntity<CustomerViewDTO> {
         val customerEntity = customerService.findById(id)
 
         customerService.save(CustomerMapper.toEntity(customerEntity, customerDTO))
@@ -39,5 +44,6 @@ class CustomerController(
     }
 
     @DeleteMapping
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     fun delete(@RequestHeader id: Long) = customerService.delete(id)
 }

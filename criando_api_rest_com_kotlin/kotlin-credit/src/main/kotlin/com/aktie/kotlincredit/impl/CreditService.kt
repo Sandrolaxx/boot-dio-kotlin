@@ -1,6 +1,7 @@
 package com.aktie.kotlincredit.impl
 
 import com.aktie.kotlincredit.entity.Credit
+import com.aktie.kotlincredit.exception.BusinessException
 import com.aktie.kotlincredit.repositories.ICreditRepository
 import com.aktie.kotlincredit.service.ICreditService
 import com.aktie.kotlincredit.service.ICustomerService
@@ -16,7 +17,7 @@ class CreditService(
         credit.customer?.apply { customerService.findById(id!!) }
 
         if (credit.customer == null) {
-            throw RuntimeException("Usuário não identificado para criação do emprestimo")
+            throw BusinessException("Usuário não identificado para criação do emprestimo")
         }
 
         return creditRepo.save(credit)
@@ -27,8 +28,8 @@ class CreditService(
     }
 
     override fun findByCreditCode(customerId: Long, creditCode: UUID): Credit {
-        val credit = creditRepo.findByCreditCode(creditCode) ?: throw RuntimeException("Crédito não encontrado")
+        val credit = creditRepo.findByCreditCode(creditCode) ?: throw BusinessException("Crédito não encontrado")
 
-        return if (credit.customer?.id == customerId) credit else throw RuntimeException("Não é possível acessar essa informação")
+        return if (credit.customer?.id == customerId) credit else throw BusinessException("Não é possível acessar essa informação")
     }
 }
