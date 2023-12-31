@@ -27,3 +27,9 @@ Bootcamp desenvolvimento backend com Kotlin.
 [Introdução a Banco de Dados Não Relacionais - NoSQL](/introducao_banco_dados_nao_relacionais/readme.md)
 
 [Contextualizando o Desenvolvimento Web com Spring Boot 3](/contextualizando_desenvolvimento_web_com_spring_kotlin/readme.md)
+
+[Criando uma API Rest com Kotlin e ](/criando_api_rest_com_kotlin/readme.md)
+
+---
+
+Link do 👉[projeto final](https://github.com/Sandrolaxx/kotlin-credit-api)
